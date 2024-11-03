@@ -14,7 +14,7 @@ private:
 public:
     DArray();
     DArray(const DArray &);
-    DArray &operator=(const DArray &);
+    DArray &operator=(const DArray &) ;
     int &operator[](int) const;
     void push_back(int);
     int size() const;
@@ -34,7 +34,7 @@ DArray::DArray(const DArray &obj)
         array[i] = obj.array[i];
     }
 }
-DArray &DArray::operator=(const DArray &obj)
+DArray &DArray::operator=(const DArray &obj) 
 {
     if (this != &obj)
     {
