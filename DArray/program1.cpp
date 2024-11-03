@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+int x = -1;
+
 class DArray
 {
 private:
@@ -11,10 +13,10 @@ private:
 
 public:
     DArray();
-    DArray(const DArray &obj);
-    DArray &operator=(const DArray &obj);
-    int &operator[](int index);
-    void push_back(int val);
+    DArray(const DArray &);
+    DArray &operator=(const DArray &);
+    int &operator[](int) const;
+    void push_back(int);
     int size() const;
 };
 
@@ -27,12 +29,11 @@ DArray::DArray(const DArray &obj)
     _size = obj._size;
     count = obj.count;
     array = new int[obj._size];
-    for (int i = 0; i < obj._size; i++)
+    for (int i{}; i < obj._size; i++)
     {
         array[i] = obj.array[i];
     }
 }
-
 DArray &DArray::operator=(const DArray &obj)
 {
     if (this != &obj)
@@ -40,23 +41,21 @@ DArray &DArray::operator=(const DArray &obj)
         _size = obj._size;
         count = obj.count;
         array = new int[obj._size];
-        for (int i = 0; i < obj._size; i++)
+        for (int i{}; i < obj._size; i++)
         {
             array[i] = obj.array[i];
         }
     }
     return *this;
 }
-
-int &DArray::operator[](int index)
+int &DArray::operator[](int index) const
 {
-    if (index >= 0 || index < _size)
+    if (index >= 0 && index < _size)
     {
         return array[index];
     }
     cout << "Index Out of Bounds" << endl;
-    static int val{-1};
-    return val;
+    return x;
 }
 
 void DArray::push_back(int val)
@@ -75,9 +74,9 @@ int DArray::size() const
     return count;
 }
 
-ostream &operator<<(ostream &os, DArray &arr)
+ostream &operator<<(ostream &os, const DArray &arr)
 {
-    for (int i = 0; i < arr.size(); i++)
+    for (int i{}; i < arr.size(); i++)
     {
         os << arr[i] << " ";
     }
